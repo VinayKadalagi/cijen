@@ -13,8 +13,9 @@ pipeline {
             steps {
                 script {
                     def customImage = docker.build('bobtestproject/jenkins-image')
-                    customImage.push()
-
+                    docker.withRegistry('https://registry.gitlab.com/', 'gitlab-registry'){
+                        customImage.push()
+                    }
                     echo "Database engine is ${DB_ENGINE}"
                     echo "DISABLE_AUTH is ${DISABLE_AUTH}"
                     sh 'printenv'
