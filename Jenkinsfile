@@ -4,7 +4,7 @@ pipeline {
     }
 
     environment {
-        DISABLE_AUTH = 'true'
+        DISABLE_AUTH = 'Vinay'
         DB_ENGINE    = 'sqlite'
     }
 
