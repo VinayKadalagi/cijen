@@ -5,7 +5,7 @@ pipeline {
 
     environment {
         DISABLE_AUTH = 'Vinay'
-        DB_ENGINE    = 'sqlite'
+        DB_ENGINE    = 'Kadalagi'
     }
 
     stages {
