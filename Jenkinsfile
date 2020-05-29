@@ -4,8 +4,7 @@ pipeline {
     }
 
     environment {
-        FAS = 'BIOS,SITE MGMT,LEAD,COLO'
-        DB_ENGINE    = 'Kadalagi'
+        FAS = "BIOS,SITE\ MGMT,LEAD,COLO"
     }
 
     stages {
