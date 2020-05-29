@@ -4,7 +4,7 @@ pipeline {
     }
 
     environment {
-        FAS = "BIOS,SITE MGMT,LEAD,COLO"
+        FAS = "BIOS,SITE\\ MGMT,LEAD,COLO"
     }
 
     stages {
