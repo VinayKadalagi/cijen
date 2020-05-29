@@ -1,2 +1,3 @@
 FROM alpine:3.7
-ENV owner=Vinay
+ARG FAS
+ENV FAS=${FAS}

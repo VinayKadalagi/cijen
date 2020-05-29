@@ -4,7 +4,7 @@ pipeline {
     }
 
     environment {
-        DISABLE_AUTH = 'Vinay'
+        FAS = 'BIOS,SITE MGMT,LEAD,COLO'
         DB_ENGINE    = 'Kadalagi'
     }
 
@@ -12,13 +12,10 @@ pipeline {
         stage('Build Docker Images') {
             steps {
                 script {
-                    def customImage = docker.build('registry.gitlab.com/vinaykadalagi1/cijen/custom-image')
+                    def customImage = docker.build('registry.gitlab.com/vinaykadalagi1/cijen/custom-image', '--build-arg FAS=${FAS}')
                     docker.withRegistry('https://registry.gitlab.com/', 'gitlab-registry'){
                         customImage.push()
                     }
-                    echo "Database engine is ${DB_ENGINE}"
-                    echo "DISABLE_AUTH is ${DISABLE_AUTH}"
-                    sh 'printenv'
                 }
             }
         }
