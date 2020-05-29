@@ -12,7 +12,7 @@ pipeline {
         stage('Build Docker Images') {
             steps {
                 script {
-                    def customImage = docker.build('bobtestproject/jenkins-image')
+                    def customImage = docker.build('jenkins-image')
                     docker.withRegistry('https://registry.gitlab.com/', 'gitlab-registry'){
                         customImage.push()
                     }
