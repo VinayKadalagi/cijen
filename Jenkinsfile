@@ -9,11 +9,15 @@ pipeline {
     }
 
     stages {
-        stage('Build') {
+        stage('Build Docker Images') {
             steps {
-                echo "Database engine is ${DB_ENGINE}"
-                echo "DISABLE_AUTH is ${DISABLE_AUTH}"
-                sh 'printenv'
+                script {
+                    def customImage = docker.build('bobtestproject/jenkins-image')
+                    customImage.push()
+                    
+                    echo "Database engine is ${DB_ENGINE}"
+                    echo "DISABLE_AUTH is ${DISABLE_AUTH}"
+                    sh 'printenv'
             }
         }
     }
