@@ -4,15 +4,15 @@ pipeline {
     }
 
     environment {
-        FAS = "BIOS,SITEMGMT,LEAD,COLO"
+        FAS = "BIOS,SITE MGMT"
     }
 
     stages {
         stage('Build Docker Images') {
             steps {
                 script {
-                    def customImage = docker.build("registry.gitlab.com/vinaykadalagi1/cijen/custom-image", "--build-arg FAS=${FAS} .")
-                    docker.withRegistry('https://registry.gitlab.com/', 'gitlab-registry'){
+                    def customImage = docker.build("registry.gitlab.com/b_ram/jenkins_test/custom-image", "--build-arg FAS=${FAS} .")
+                    docker.withRegistry('https://registry.gitlab.com/', 'test_gitlab'){
                         customImage.push()
                     }
                 }
