@@ -6,7 +6,7 @@ pipeline {
 
     parameters {
         string( 
-            name: 'excludeFAS', 
+            name: 'excludeFASval', 
             defaultValue: '',
             description: 'testing'
         )
