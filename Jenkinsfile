@@ -5,10 +5,10 @@ pipeline {
     }
 
     parameters {
-        choice( 
+        string( 
             name: 'FAS', 
-            choices: ['one', 'two', 'three'],
-            description: 'Sélectionnez le projet à construire.'
+            defaultValue: '',
+            description: 'testing'
         )
     
     
