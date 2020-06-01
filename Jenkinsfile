@@ -7,11 +7,9 @@ pipeline {
     parameters {
         string( 
             name: 'FAS', 
-            defaultValue: 'default',
+            defaultValue: '',
             description: 'testing'
         )
-    
-    
     }
 
     environment {
