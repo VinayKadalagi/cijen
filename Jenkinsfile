@@ -7,7 +7,7 @@ pipeline {
     parameters {
         choice( 
             name: 'FAS', 
-            choices: "stage1/nstage2", 
+            choices: ['one', 'two', 'three'],
             description: 'Sélectionnez le projet à construire.'
         )
     
