@@ -6,7 +6,7 @@ pipeline {
 
     parameters {
         string( 
-            name: 'FAS', 
+            name: 'excludeFAS', 
             defaultValue: '',
             description: 'testing'
         )
@@ -18,8 +18,9 @@ pipeline {
 
             steps {
                 script {
-                    echo "Hello hey ${params.FAS}"
-                    def customImage = docker.build("registry.gitlab.com/vinaykadalagi1/cijen/custom-image", "--build-arg FAS=${params.FAS} .")
+                    def excludeFAS =  "\"" + params.FAS + "\""
+                    echo "Hello hey ${excludeFAS}"
+                    def customImage = docker.build("registry.gitlab.com/vinaykadalagi1/cijen/custom-image", "--build-arg FAS=${excludeFAS} .")
                     docker.withRegistry('https://registry.gitlab.com/', 'gitlab-registry'){
                         customImage.push()
                     }
