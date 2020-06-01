@@ -6,9 +6,9 @@ pipeline {
 
     parameters {
         string( 
-            name: 'excludeFASval', 
+            name: 'exclude FASval', 
             defaultValue: '',
-            description: 'testing'
+            description: 'Please enter comma separated exclude Functional Area list'
         )
     }
 
