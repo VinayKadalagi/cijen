@@ -7,7 +7,7 @@ pipeline {
     parameters {
         string( 
             name: 'FAS', 
-            defaultValue: '',
+            defaultValue: 'default',
             description: 'testing'
         )
     
