@@ -12,10 +12,6 @@ pipeline {
         )
     }
 
-    environment {
-        FAS = "BIOS,SITEMGMT"
-    }
-
     stages {
 
         stage('Build Docker Images') {
