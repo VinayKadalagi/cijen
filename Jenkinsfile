@@ -6,7 +6,7 @@ pipeline {
 
     parameters {
         string( 
-            name: 'exclude FASval', 
+            name: 'exclude Functional Areas', 
             defaultValue: '',
             description: 'Please enter comma separated exclude Functional Area list'
         )
@@ -18,7 +18,7 @@ pipeline {
 
             steps {
                 script {
-                    def excludeFAS =  "\"" + params['exclude FASval'] + "\""
+                    def excludeFAS =  "\"" + params['exclude Functional Areas'] + "\""
                     echo "Hello hey ${excludeFAS}"
                     def customImage = docker.build("registry.gitlab.com/vinaykadalagi1/cijen/custom-image", "--build-arg FAS=${excludeFAS} .")
                     docker.withRegistry('https://registry.gitlab.com/', 'gitlab-registry'){
