@@ -18,8 +18,8 @@ pipeline {
 
             steps {
                 script {
-                    def excludeFAS =  "\"" + ${params.exclude\ FASval} + "\""
-                    echo "Hello hey ${exclude FAS}"
+                    def excludeFAS =  "\"" + params['exclude FASval'] + "\""
+                    echo "Hello hey ${excludeFAS}"
                     def customImage = docker.build("registry.gitlab.com/vinaykadalagi1/cijen/custom-image", "--build-arg FAS=${excludeFAS} .")
                     docker.withRegistry('https://registry.gitlab.com/', 'gitlab-registry'){
                         customImage.push()
