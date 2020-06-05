@@ -27,12 +27,13 @@ pipeline {
                 }
             }
         }
-    }
+    
     stage('Deploying to Machine') {
         steps {
              script {
                  kubernetesDeploy(configs: "AccountsMongoVolume.yaml", kubeconfigId: "mykubeconfig")
              }
         }
+    }
     }
 }
