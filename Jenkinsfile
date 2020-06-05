@@ -20,10 +20,10 @@ pipeline {
                 script {
                     def excludeFAS =  "\"" + params['exclude Functional Areas'] + "\""
                     echo "Hello hey ${excludeFAS}"
-                    def customImage = docker.build("registry.gitlab.com/vinaykadalagi1/cijen/custom-image", "--build-arg FAS=${excludeFAS} .")
-                    docker.withRegistry('https://registry.gitlab.com/', 'gitlab-registry'){
-                        customImage.push()
-                    }
+                    // def customImage = docker.build("registry.gitlab.com/vinaykadalagi1/cijen/custom-image", "--build-arg FAS=${excludeFAS} .")
+                    // docker.withRegistry('https://registry.gitlab.com/', 'gitlab-registry'){
+                    //     customImage.push()
+                    // }
                 }
             }
         }
@@ -31,7 +31,7 @@ pipeline {
     stage('Deploying to Machine') {
         steps {
              script {
-                 kubernetesDeploy(configs: "AccountsMongoVolume.yaml", kubeconfigId: "mykubeconfig")
+                 kubernetesDeploy(configs: "AccountsMongoVolume.yaml")
              }
         }
     }
