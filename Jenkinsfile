@@ -31,7 +31,7 @@ pipeline {
     stage('Deploying to Machine') {
         steps {
              script {
-                 kubernetesDeploy(configs: "AccountsMongoVolume.yaml")
+                 kubernetesDeploy(kubeconfigId: "minikube", configs: "AccountsMongoVolume.yaml")
              }
         }
     }
