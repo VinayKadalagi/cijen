@@ -31,8 +31,8 @@ pipeline {
     stage('Deploying to Machine') {
         steps {
              script {
-                 if [ ! -d deploy ] ; then mkdir deploy; fi
-                 helm template --output-dir './deploy' --set tag="${env.GIT_COMMIT.substring(0,12)}" 'mychart'
+                 sh "if [ ! -d deploy ] ; then mkdir deploy; fi"
+                 sh "helm template --output-dir './deploy' --set tag="${env.GIT_COMMIT.substring(0,12)}" 'mychart'"
                  kubernetesDeploy(kubeconfigId: "minikube", configs: "deploy/mychart/templates/deployment.yaml")
              }
         }
