@@ -11,6 +11,8 @@ spec:
       app: custom
   template:
     metadata:
+      annotations:
+        rollme: {{ randAlphaNum 5 | quote }}
       labels:
         app: custom
     spec:
