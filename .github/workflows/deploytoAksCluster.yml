@@ -1,0 +1,50 @@
+on: [push]
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    
+    - uses: azure/docker-login@v1
+      with:
+        login-server: cijenregistry.azurecr.io
+        username: ${{ secrets.acr_cijenregistry_username }}
+        password: ${{ secrets.acr_cijenregistry_password }}
+    
+    - name: Build and push image to ACR
+      id: build-image
+      run: |
+        docker build "$GITHUB_WORKSPACE/" -f  "Dockerfile" -t cijenregistry.azurecr.io/aksdeploy:${{ github.sha }}
+        docker push cijenregistry.azurecr.io/aksdeploy:${{ github.sha }}
+    
+    - uses: azure/k8s-set-context@v1
+      with:
+         kubeconfig: ${{ secrets.aks_aksdeploy_kubeConfig }}
+      id: login
+    
+    - name: Create namespace
+      run: |
+        namespacePresent=`kubectl get namespace | grep aksdeploy82dd | wc -l`
+        if [ $namespacePresent -eq 0 ]
+        then
+            echo `kubectl create namespace aksdeploy82dd`
+        fi
+
+    - uses: azure/k8s-create-secret@v1
+      with:
+        namespace: aksdeploy82dd
+        container-registry-url: cijenregistry.azurecr.io
+        container-registry-username: ${{ secrets.acr_cijenregistry_username }}
+        container-registry-password: ${{ secrets.acr_cijenregistry_password }}
+        secret-name: aksdeploydockerauth
+       
+    - uses: azure/k8s-deploy@v1
+      with:
+        namespace: aksdeploy82dd
+        manifests: |
+          manifests/deployment.yml
+          manifests/service.yml
+        images: |
+          cijenregistry.azurecr.io/aksdeploy:${{ github.sha }}
+        imagepullsecrets: |
+          aksdeploydockerauth
