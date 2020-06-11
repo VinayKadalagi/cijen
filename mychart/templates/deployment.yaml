@@ -16,5 +16,5 @@ spec:
     spec:
       containers:
       - name: custom
-        image: registry.gitlab.com/vinaykadalagi1/cijen/custom-image:"{{ .Values.tag | default .Chart.AppVersion }}"
+        image: registry.gitlab.com/vinaykadalagi1/cijen/custom-image:{{ .Values.tag | default .Chart.AppVersion }}
         imagePullPolicy: Always
