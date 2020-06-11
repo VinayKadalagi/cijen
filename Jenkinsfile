@@ -33,7 +33,7 @@ pipeline {
              script {
                  sh "if [ ! -d deploy ] ; then mkdir deploy; fi"
                  sh """helm template --output-dir deploy --set tag=${env.GIT_COMMIT.substring(0,12)} mychart """
-                 kubernetesDeploy(kubeconfigId: "minikube", configs: "deploy/mychart/templates/deployment.yaml")
+                 kubernetesDeploy(kubeconfigId: "akskube", configs: "deploy/mychart/templates/deployment.yaml")
              }
         }
     }
