@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: custom-deployment1
+  labels:
+    app: custom
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: custom
+  template:
+    metadata:
+      labels:
+        app: custom
+    spec:
+      containers:
+      - name: custom
+        image: registry.gitlab.com/vinaykadalagi1/cijen/custom-image:"{{ .Values.tag | default .Chart.AppVersion }}"
+        imagePullPolicy: Always

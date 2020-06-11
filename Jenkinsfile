@@ -20,10 +20,10 @@ pipeline {
                 script {
                     def excludeFAS =  "\"" + params['exclude Functional Areas'] + "\""
                     echo "Hello hey ${excludeFAS}"
-                    // def customImage = docker.build("registry.gitlab.com/vinaykadalagi1/cijen/custom-image", "--build-arg FAS=${excludeFAS} .")
-                    // docker.withRegistry('https://registry.gitlab.com/', 'gitlab-registry'){
-                    //     customImage.push()
-                    // }
+                    def customImage = docker.build("registry.gitlab.com/vinaykadalagi1/cijen/custom-image:${env.GIT_COMMIT.substring(0,12)}", "--build-arg FAS=${excludeFAS} .")
+                    docker.withRegistry('https://registry.gitlab.com/', 'gitlab-registry'){
+                         customImage.push()
+                    }
                 }
             }
         }
@@ -31,7 +31,9 @@ pipeline {
     stage('Deploying to Machine') {
         steps {
              script {
-                 kubernetesDeploy(kubeconfigId: "minikube", configs: "custom-deployment.yaml")
+                 if [ ! -d deploy ] ; then mkdir deploy; fi
+                 helm template --output-dir './deploy' --set tag="${env.GIT_COMMIT.substring(0,12)}" 'mychart'
+                 kubernetesDeploy(kubeconfigId: "minikube", configs: "deploy/mychart/templates/deployment.yaml")
              }
         }
     }
