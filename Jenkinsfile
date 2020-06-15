@@ -18,11 +18,13 @@ pipeline {
 
             steps {
                 script {
-                    withCredentials([kubeconfigFile(credentialsId: 'akskube', variable: 'KUBECONFIG')]) {
-                        echo ${KUBECONFIG}
+                    withCredentials([usernameColonPassword(credentialsId: 'gitlab-registry', variable: 'creds')]) {
+                        echo "in script"
+                        echo "${creds}"
                         sh '''
                         set +x
-                        echo "$KUBECONFIG"
+                        echo "in shell"
+                        echo "$creds"
                         '''
                     }
                     // def excludeFAS =  "\"" + params['exclude Functional Areas'] + "\""
