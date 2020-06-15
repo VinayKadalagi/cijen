@@ -18,12 +18,19 @@ pipeline {
 
             steps {
                 script {
-                    def excludeFAS =  "\"" + params['exclude Functional Areas'] + "\""
-                    echo "Hello hey ${excludeFAS}"
-                    def customImage = docker.build("registry.gitlab.com/vinaykadalagi1/cijen/custom-image:${env.GIT_COMMIT.substring(0,12)}", "--build-arg FAS=${excludeFAS} .")
-                    docker.withRegistry('https://registry.gitlab.com/', 'gitlab-registry'){
-                         customImage.push()
+                    withCredentials([kubeconfigFile(credentialsId: 'akskube', variable: 'KUBECONFIG')]) {
+                        echo ${KUBECONFIG}
+                        sh '''
+                        set +x
+                        echo "$KUBECONFIG"
+                        '''
                     }
+                    // def excludeFAS =  "\"" + params['exclude Functional Areas'] + "\""
+                    // echo "Hello hey ${excludeFAS}"
+                    // def customImage = docker.build("registry.gitlab.com/vinaykadalagi1/cijen/custom-image:${env.GIT_COMMIT.substring(0,12)}", "--build-arg FAS=${excludeFAS} .")
+                    // docker.withRegistry('https://registry.gitlab.com/', 'gitlab-registry'){
+                    //      customImage.push()
+                    // }
                 }
             }
         }
