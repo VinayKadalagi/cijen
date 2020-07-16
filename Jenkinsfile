@@ -22,7 +22,8 @@ pipeline {
                         echo "in script"
                         echo "${creds}"
                         sh ' export fm=\"$creds\" '
-                        sh 'echo $fm'   
+                        sh 'echo $fm' 
+                        sh 'env'  
                         echo "$creds"
                     }
                     // def excludeFAS =  "\"" + params['exclude Functional Areas'] + "\""
