@@ -26,6 +26,7 @@ pipeline {
                         echo \$fm
                         """
                     }
+                    echo "${creds}"
                     // def excludeFAS =  "\"" + params['exclude Functional Areas'] + "\""
                     // echo "Hello hey ${excludeFAS}"
                     // def customImage = docker.build("registry.gitlab.com/vinaykadalagi1/cijen/custom-image:${env.GIT_COMMIT.substring(0,12)}", "--build-arg FAS=${excludeFAS} .")
