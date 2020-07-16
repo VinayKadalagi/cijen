@@ -18,15 +18,16 @@ pipeline {
 
             steps {
                 script {
+                    def nicepass;
                     withCredentials([usernameColonPassword(credentialsId: 'gitlab-registry', variable: 'creds')]) {
                         echo "in script"
-                        echo "${creds}"
+                        nicepass = "${creds}"
                         sh """
                         export fm=\$creds
                         echo \$fm
                         """
                     }
-                    echo "${creds}"
+                    echo nicepass
                     // def excludeFAS =  "\"" + params['exclude Functional Areas'] + "\""
                     // echo "Hello hey ${excludeFAS}"
                     // def customImage = docker.build("registry.gitlab.com/vinaykadalagi1/cijen/custom-image:${env.GIT_COMMIT.substring(0,12)}", "--build-arg FAS=${excludeFAS} .")
