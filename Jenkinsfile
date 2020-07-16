@@ -22,7 +22,7 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'test_gitlab', usernameVariable : 'db_username', passwordVariable: 'creds')]) {
                         echo "in script"
                         nicepass = "${creds}"
-                    }                    }
+                    }                    
                     echo nicepass
                     // def excludeFAS =  "\"" + params['exclude Functional Areas'] + "\""
                     // echo "Hello hey ${excludeFAS}"
