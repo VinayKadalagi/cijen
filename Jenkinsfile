@@ -21,9 +21,8 @@ pipeline {
                     withCredentials([usernameColonPassword(credentialsId: 'gitlab-registry', variable: 'creds')]) {
                         echo "in script"
                         echo "${creds}"
-                        sh '''
-                        set +x
-                        echo "in shell"
+                        sh ' export fm = "$creds" '
+                        sh 'echo $fm'
                         echo "$creds"
                         '''
                     }
