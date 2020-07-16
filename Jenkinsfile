@@ -21,10 +21,10 @@ pipeline {
                     withCredentials([usernameColonPassword(credentialsId: 'gitlab-registry', variable: 'creds')]) {
                         echo "in script"
                         echo "${creds}"
-                        sh """ 
+                        sh '''
                         export fm=\"$creds\" 
                         echo $fm
-                        """
+                        '''
                         echo "$creds"
                     }
                     // def excludeFAS =  "\"" + params['exclude Functional Areas'] + "\""
