@@ -19,7 +19,7 @@ pipeline {
             steps {
                 script {
                     def nicepass;
-                    withCredentials([usernameColonPassword(credentialsId: 'gitlab-registry', variable: 'creds')]) {
+                    withCredentials([usernamePassword(credentialsId: 'test_gitlab', passwordVariable: 'creds')]) {
                         echo "in script"
                         nicepass = "${creds}"
                         sh """
