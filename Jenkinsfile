@@ -10,7 +10,7 @@ pipeline {
     }
   }
 
-    Stages {
+    stages {
         stage('Build Docker Images') {
             steps {
                 container('docker') {
