@@ -3,18 +3,22 @@ pipeline {
         label '!windows'
     }
 
-    parameters {
-        string( 
-            name: 'exclude Functional Areas', 
-            defaultValue: '',
-            description: 'Please enter comma separated exclude Functional Area list'
-        )
-    }
+    kubernetes {
+    def label = "docker-jenkins-${UUID.randomUUID().toString()}"
+    podTemplate(label: label,
+        containers: [
+                containerTemplate(name: 'jnlp', image: 'jenkins/jnlp-slave:alpine'),
+                containerTemplate(name: 'docker', image: 'docker', command: 'cat', ttyEnabled: true),
+            ],
+            volumes: [
+                hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock'),
+            ],
+        ]) {
 
-    stages {
+    node(label) {
 
         stage('Build Docker Images') {
-
+          container('docker') {
             steps {
                 script {
                     def nicepass;
@@ -31,9 +35,12 @@ pipeline {
                     def customImage = docker.build("registry.gitlab.com/vinaykadalagi1/cijen/custom-image:${env.GIT_COMMIT.substring(0,12)}", "--build-arg FAS=${excludeFAS} .")
                     docker.withRegistry('https://registry.gitlab.com/', 'gitlab-registry'){
                          customImage.push()
+                        }
                     }
                 }
             }
         }
     }
+  }
+}
 }
