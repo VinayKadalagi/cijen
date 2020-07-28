@@ -1,3 +1,5 @@
+def label = "docker-jenkins-${UUID.randomUUID().toString()}"
+
 podTemplate(label: label,
         containers: [
                 containerTemplate(name: 'jnlp', image: 'jenkins/jnlp-slave:alpine'),
