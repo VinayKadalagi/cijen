@@ -1,4 +1,3 @@
-List<String> CHOICES = [];
 pipeline {
     agent {
         label '!windows'
@@ -27,11 +26,11 @@ pipeline {
                     }                    
                     echo nicepass
                     echo user
-                    // def excludeFAS =  "\"" + params['exclude Functional Areas'] + "\""
-                    // echo "Hello hey ${excludeFAS}"
-                    // def customImage = docker.build("registry.gitlab.com/vinaykadalagi1/cijen/custom-image:${env.GIT_COMMIT.substring(0,12)}", "--build-arg FAS=${excludeFAS} .")
-                    // docker.withRegistry('https://registry.gitlab.com/', 'gitlab-registry'){
-                    //      customImage.push()
+                    def excludeFAS =  "\"" + params['exclude Functional Areas'] + "\""
+                    echo "Hello hey ${excludeFAS}"
+                    def customImage = docker.build("registry.gitlab.com/vinaykadalagi1/cijen/custom-image:${env.GIT_COMMIT.substring(0,12)}", "--build-arg FAS=${excludeFAS} .")
+                    docker.withRegistry('https://registry.gitlab.com/', 'gitlab-registry'){
+                         customImage.push()
                     }
                 }
             }
