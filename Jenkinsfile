@@ -1,7 +1,4 @@
 pipeline {
-    agent {
-        label '!windows'
-    }
 
     parameters {
         string( 
@@ -36,3 +33,4 @@ pipeline {
             }
         }
     }
+}
