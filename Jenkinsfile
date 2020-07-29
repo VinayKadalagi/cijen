@@ -26,14 +26,14 @@ spec:
     stage('AlpineAndBusybox') {
       steps {
         container('alpine') {
-          sh 'ls /var/jenkins/agent/workspace'
+          sh 'ls /home/jenkins/agent/workspace'
           sh 'pwd'
-          sh 'tree /var/jenkins/agent/'
+          sh 'tree /home/jenkins/agent'
         }
         container('busybox') {
-          sh 'ls /var/jenkins/agent/workspace'
+          sh 'ls /home/jenkins/agent/workspace'
           sh 'pwd'
-          sh 'tree /var/jenkins/agent/'
+          sh 'tree /home/jenkins/agent'
         }
       }
     }
