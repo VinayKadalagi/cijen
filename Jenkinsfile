@@ -12,6 +12,7 @@ podTemplate(label: label,
     node(label) {
             stage('Docker Build') {
                 container('docker') {
+                    checkout scm
                     echo "Building docker image..."
                     sh "docker build ." 
                     sh "docker images"               
