@@ -10,7 +10,7 @@ metadata:
 spec:
   containers:
   - name: docker
-    image: gcc:9.3.0
+    image: docker
     command:
     - cat
     tty: true
