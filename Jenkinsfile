@@ -13,7 +13,8 @@ podTemplate(label: label,
             stage('Docker Build') {
                 container('docker') {
                     echo "Building docker image..."
-                    sh "docker build ." 
+                    sh "ls ."
+                    sh "docker build ."
                     sh "docker images"               
                 }
         }
