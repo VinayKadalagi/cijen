@@ -30,7 +30,7 @@ spec:
           
         }
         container('docker') {
-          sh 'pwd'  
+          sh 'docker --version'  
 
         }
       }
