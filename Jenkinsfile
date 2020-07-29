@@ -26,7 +26,7 @@ spec:
             passwordVariable: 'adminPassword'
           )]){
         container('docker') {
-            sh 'echo ${adminPassword} | docker login --username ${adminUser} --password-stdin'
+            sh 'echo ${adminPassword} | docker login --username ${adminUser} --password-stdin registry.gitlab.com'
         }
         }
       }
