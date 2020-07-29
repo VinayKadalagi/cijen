@@ -26,8 +26,7 @@ spec:
             passwordVariable: 'adminPassword'
           )]){
         container('docker') {
-            sh 'echo ${adminUser}'
-            sh 'docker --version'
+            sh 'echo ${adminPassword} | docker login --username ${adminUser} --password-stdin'
         }
         }
       }
