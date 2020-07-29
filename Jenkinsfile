@@ -13,7 +13,9 @@ podTemplate(label: label,
             stage('Docker Build') {
                 container('docker') {
                     echo "Building docker image..."
-                    sh "ls ."
+                    sh "ls"
+                    sh "pwd"
+                    sh "ls /home/jenkins/agent"
                     sh "docker build ."
                     sh "docker images"               
                 }
