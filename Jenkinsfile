@@ -1,44 +1,25 @@
-pipeline {
-  agent {
-    kubernetes {
-      yaml """
-apiVersion: v1
-kind: Pod
-metadata:
-  labels:
-    name: docker-box
-spec:
-  containers:
-  - name: docker
-    image: docker
-    command:
-    - cat
-    tty: true
-    volumeMounts:
-    - name: dockersock
-      mountPath: /var/run/docker.sock
-  volumes:
-  - name: dockersock
-    hostPath:
-      path: /var/run/docker.sock
-"""
-    }
-  }
-  stages {
-    stage('AlpineAndBusybox') {
-      steps {
-        withCredentials([usernamePassword(
-            credentialsId: "test_gitlab",
-            usernameVariable: 'adminUser',
-            passwordVariable: 'adminPassword'
-          )]){
-        container('docker') {
-            sh 'echo ${adminPassword} | docker login --username ${adminUser} --password-stdin registry.gitlab.com'
-            sh 'docker build --tag registry.gitlab.com/vinaykadalagi1/cijen/jenkube:1.0.0 .'
-            sh 'docker push registry.gitlab.com/vinaykadalagi1/cijen/jenkube:1.0.0'
+def label = "docker-jenkins-${UUID.randomUUID().toString()}"
+
+podTemplate(label: label,
+        containers: [
+                containerTemplate(name: 'jnlp', image: 'jenkins/jnlp-slave:alpine'),
+                containerTemplate(name: 'docker', image: 'docker', command: 'cat', ttyEnabled: true),
+            ],
+            volumes: [
+                hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock'),
+            ]
+        ) {
+    node(label) {
+            stage('Docker Build') {
+                container('docker') { 
+                    checkout scm  
+                    echo "Building docker image..."
+                    sh "ls"
+                    sh "pwd"
+                    sh "ls /home/jenkins/agent/workspace"
+                    sh "docker build ."
+                    sh "docker images"               
+            }
         }
-        }
-      }
     }
-  }
 }
