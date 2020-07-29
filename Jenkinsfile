@@ -11,14 +11,14 @@ podTemplate(label: label,
         ) {
     node(label) {
             stage('Docker Build') {
-                container('docker') {
+                container('docker') {   
                     echo "Building docker image..."
                     sh "ls"
                     sh "pwd"
-                    sh "ls /home/jenkins/agent"
+                    sh "ls /home/jenkins/agent/workspace"
                     sh "docker build ."
                     sh "docker images"               
-                }
+            }
         }
     }
 }
