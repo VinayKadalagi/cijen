@@ -1,4 +1,4 @@
-FROM alpine:3.7
+FROM alpine
 ARG FAS
 ENV FAS=${FAS}
 ADD run.sh /tmp/run.sh
