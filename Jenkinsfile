@@ -26,10 +26,14 @@ spec:
     stage('Run maven') {
       steps {
         container('maven') {
-          sh 'mvn -version'
+          sh 'ls /var/jenkins/agent/workspace'
+          sh 'pwd'
+          sh 'tree /var/jenkins/agent/'
         }
         container('busybox') {
-          sh '/bin/busybox'
+          sh 'ls /var/jenkins/agent/workspace'
+          sh 'pwd'
+          sh 'tree /var/jenkins/agent/'
         }
       }
     }
