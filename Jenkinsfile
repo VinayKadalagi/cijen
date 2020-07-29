@@ -14,8 +14,8 @@ spec:
     command:
     - cat
     tty: true
-  - name: busybox
-    image: busybox
+  - name: gcc
+    image: gcc:9.3.0
     command:
     - cat
     tty: true
@@ -28,9 +28,10 @@ spec:
         container('alpine') {
           sh 'ls /home/jenkins/agent/workspace'
           sh 'pwd'
+          sh 'apk add tree'
           sh 'tree /home/jenkins/agent'
         }
-        container('busybox') {
+        container('gcc') {
           sh 'ls /home/jenkins/agent/workspace'
           sh 'pwd'
           sh 'tree /home/jenkins/agent'
