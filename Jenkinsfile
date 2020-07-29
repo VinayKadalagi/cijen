@@ -9,13 +9,13 @@ metadata:
     some-label: some-label-value
 spec:
   containers:
-  - name: alpine
-    image: alpine
+  - name: gcc
+    image: gcc:9.3.0
     command:
     - cat
     tty: true
-  - name: gcc
-    image: gcc:9.3.0
+  - name: docker
+    image: docker
     command:
     - cat
     tty: true
@@ -25,16 +25,13 @@ spec:
   stages {
     stage('AlpineAndBusybox') {
       steps {
-        container('alpine') {
-          sh 'ls /home/jenkins/agent/workspace'
-          sh 'pwd'
-          sh 'apk add tree'
-          sh 'tree /home/jenkins/agent'
-        }
         container('gcc') {
-          sh 'ls /home/jenkins/agent/workspace'
           sh 'pwd'
-          sh 'tree /home/jenkins/agent'
+          
+        }
+        container('docker') {
+          sh 'pwd'  
+
         }
       }
     }
