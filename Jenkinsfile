@@ -2,7 +2,7 @@ def label = "docker-jenkins-${UUID.randomUUID().toString()}"
 
 podTemplate(label: label,
         containers: [
-                containerTemplate(name: 'jnlp', image: 'jenkins/jnlp-slave:gcc'),
+                containerTemplate(name: 'jnlp', image: 'jenkins/jnlp-slave:alpine'),
                 containerTemplate(name: 'docker', image: 'docker', command: 'cat', ttyEnabled: true),
             ],
             volumes: [
