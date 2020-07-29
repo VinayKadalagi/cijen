@@ -13,7 +13,7 @@ podTemplate(label: label,
             stage('Docker Build') {
                 container('docker') {
                     echo "Building docker image..."
-                    sh "docker --version"                
+                    sh "ls /home/jenkins/agent"                
                 }
         }
     }
