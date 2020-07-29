@@ -25,13 +25,22 @@ spec:
   stages {
     stage('AlpineAndBusybox') {
       steps {
+        
         container('gcc') {
           sh 'pwd'
           
         }
+
+        withCredentials([usernamePassword(
+            credentialsId: "test_gitlab",
+            usernameVariable: 'adminUser',
+            passwordVariable: 'adminPassword'
+          )]){
         container('docker') {
           sh 'docker --version'  
+          sh 'echo ${adminUser}'
 
+        }
         }
       }
     }
