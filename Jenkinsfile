@@ -23,9 +23,9 @@ spec:
     }
   }
   stages {
-    stage('Run maven') {
+    stage('AlpineAndBusybox') {
       steps {
-        container('maven') {
+        container('alpine') {
           sh 'ls /var/jenkins/agent/workspace'
           sh 'pwd'
           sh 'tree /var/jenkins/agent/'
