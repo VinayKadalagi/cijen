@@ -25,7 +25,7 @@ spec:
             usernameVariable: 'adminUser',
             passwordVariable: 'adminPassword'
           )]){
-        container('gcc') {
+        container('docker') {
             sh 'echo ${adminUser}'
             sh 'docker --version'
         }
