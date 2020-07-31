@@ -33,9 +33,8 @@ spec:
             passwordVariable: 'adminPassword'
           )]){
         container('docker') {
-            git 'https://github.com/VinayKadalagi/cijen/tree/develop/CustomImage'
             script {
-            def image = docker.build 'cusdock'
+            def image = docker.build("cusdock","CustomImage")
             image.inside(){
               sh "docker info"
             }
