@@ -17,10 +17,15 @@ spec:
     volumeMounts:
     - name: dockersock
       mountPath: /var/run/docker.sock
+    - name: daemon
+      mountPath: /etc/docker/daemon.json
   volumes:
   - name: dockersock
     hostPath:
       path: /var/run/docker.sock
+  - name: daemon
+    hostPath:
+      path: /etc/docker/daemon.json
 """
     }
   }
