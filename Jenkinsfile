@@ -10,7 +10,7 @@ metadata:
 spec:
   containers:
   - name: docker
-    image: docker:dind
+    image: registry.gitlab.com/vinaykadalagi1/cijen/customdind
     command:
     - cat
     tty: true
@@ -32,13 +32,15 @@ spec:
             usernameVariable: 'adminUser',
             passwordVariable: 'adminPassword'
           )]){
+        
         container('docker') {
-            script {
-            def image = docker.build("cusdock","CustomImage")
-            image.inside(){
-              sh "docker info"
-            }
-            }
+            // script {
+            // def image = docker.build("cusdock","CustomImage")
+            // image.inside(){
+            //   sh "docker info"
+            // }
+            // }
+            sh 'docker info'
             //sh 'docker build --tag registry.gitlab.com/vinaykadalagi1/cijen/jenkube:1.0.0 .'
             // sh 'docker push registry.gitlab.com/vinaykadalagi1/cijen/jenkube:1.0.0'
         }
