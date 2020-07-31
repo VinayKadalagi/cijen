@@ -10,7 +10,7 @@ metadata:
 spec:
   containers:
   - name: docker
-    image: docker
+    image: docker:dind
     command:
     - cat
     tty: true
