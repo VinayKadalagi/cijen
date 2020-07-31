@@ -33,9 +33,9 @@ spec:
             passwordVariable: 'adminPassword'
           )]){
         container('docker') {
-            sh 'echo ${adminPassword} | docker login --username ${adminUser} --password-stdin registry.gitlab.com'
-            sh 'docker build --tag registry.gitlab.com/vinaykadalagi1/cijen/jenkube:1.0.0 .'
-            sh 'docker push registry.gitlab.com/vinaykadalagi1/cijen/jenkube:1.0.0'
+            sh 'docker info'
+            //sh 'docker build --tag registry.gitlab.com/vinaykadalagi1/cijen/jenkube:1.0.0 .'
+            // sh 'docker push registry.gitlab.com/vinaykadalagi1/cijen/jenkube:1.0.0'
         }
         }
       }
