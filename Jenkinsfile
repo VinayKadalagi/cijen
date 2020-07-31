@@ -34,9 +34,11 @@ spec:
           )]){
         container('docker') {
             git 'https://github.com/VinayKadalagi/cijen/tree/develop/CustomImage'
+            script {
             def image = docker.build 'cusdock'
             image.inside(){
               sh "docker info"
+            }
             }
             //sh 'docker build --tag registry.gitlab.com/vinaykadalagi1/cijen/jenkube:1.0.0 .'
             // sh 'docker push registry.gitlab.com/vinaykadalagi1/cijen/jenkube:1.0.0'
