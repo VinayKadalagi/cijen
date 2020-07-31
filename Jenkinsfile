@@ -33,9 +33,10 @@ spec:
             passwordVariable: 'adminPassword'
           )]){
         container('docker') {
-            sh 'docker build -t cusdock CustomImage'
-            docker.image('cusdock').inside(){
-              sh "cat /etc/docker/daemon.json"
+            git 'https://github.com/VinayKadalagi/cijen/tree/develop/CustomImage'
+            def image = docker.build 'cusdock'
+            image.inside(){
+              sh "docker info"
             }
             //sh 'docker build --tag registry.gitlab.com/vinaykadalagi1/cijen/jenkube:1.0.0 .'
             // sh 'docker push registry.gitlab.com/vinaykadalagi1/cijen/jenkube:1.0.0'
