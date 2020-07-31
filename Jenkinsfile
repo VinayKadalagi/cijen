@@ -33,7 +33,7 @@ spec:
             passwordVariable: 'adminPassword'
           )]){
         container('docker') {
-            sh "docker build -t cusdock CustomImage"
+            sh 'docker build -t cusdock CustomImage'
             docker.image('cusdock').inside(){
               sh "cat /etc/docker/daemon.json"
             }
