@@ -9,23 +9,29 @@ metadata:
     name: docker-box
 spec:
   containers:
-  - name: docker
+  - name: dind
     image: registry.gitlab.com/vinaykadalagi1/cijen/customdind
-    command:
-    - cat
     tty: true
+    command:
+    - 'cat'
     volumeMounts:
-    - name: dockersock
+    - name: socket
       mountPath: /var/run/docker.sock
-    - name: daemon
-      mountPath: /etc/docker/daemon.json
+  
+  - name: docker
+    image: docker
+    tty: true
+    command:
+    - 'cat'
+    volumeMounts:
+    - name: socket
+      mountPath: /var/run/docker.sock
   volumes:
   - name: dockersock
     hostPath:
       path: /var/run/docker.sock
-  - name: daemon
-    hostPath:
-      path: /etc/docker/daemon.json
+  - name: socket
+    emptyDir: {}
 """
     }
   }
@@ -38,7 +44,7 @@ spec:
             passwordVariable: 'adminPassword'
           )]){
         
-        container('docker') {
+        container('dind') {
             // script {
             // def image = docker.build("cusdock","CustomImage")
             // image.inside(){
