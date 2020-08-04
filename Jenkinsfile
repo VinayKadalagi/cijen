@@ -10,22 +10,33 @@ metadata:
 spec:
   containers:
   - name: docker
-    image: docker
+    image: registry.gitlab.com/vinaykadalagi1/cijen/customdind
     command:
     - cat
     tty: true
     volumeMounts:
     - name: dockersock
       mountPath: /var/run/docker.sock
+<<<<<<< HEAD
     - name: dockerconfig
       mountPath: /etc/docker
+=======
+    - name: daemon
+      mountPath: /etc/docker/daemon.json
+>>>>>>> 02aef0b7d241b92669acded4d8b3c3824d7386ba
   volumes:
   - name: dockersock
     hostPath:
       path: /var/run/docker.sock
+<<<<<<< HEAD
   - name: dockerconfig
     hostpath:
       path: /etc/docker
+=======
+  - name: daemon
+    hostPath:
+      path: /etc/docker/daemon.json
+>>>>>>> 02aef0b7d241b92669acded4d8b3c3824d7386ba
 """
     }
   }
@@ -37,10 +48,17 @@ spec:
             usernameVariable: 'adminUser',
             passwordVariable: 'adminPassword'
           )]){
+        
         container('docker') {
-            sh 'echo ${adminPassword} | docker login --username ${adminUser} --password-stdin registry.gitlab.com'
-            sh 'docker build --tag registry.gitlab.com/vinaykadalagi1/cijen/jenkube:1.0.0 .'
-            sh 'docker push registry.gitlab.com/vinaykadalagi1/cijen/jenkube:1.0.0'
+            // script {
+            // def image = docker.build("cusdock","CustomImage")
+            // image.inside(){
+            //   sh "docker info"
+            // }
+            // }
+            sh 'docker info'
+            //sh 'docker build --tag registry.gitlab.com/vinaykadalagi1/cijen/jenkube:1.0.0 .'
+            // sh 'docker push registry.gitlab.com/vinaykadalagi1/cijen/jenkube:1.0.0'
         }
         }
       }
