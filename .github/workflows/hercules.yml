@@ -1,0 +1,5 @@
+- name: Hercules Insights
+  uses: src-d/hercules@v10.7.2
+  with:
+    # hercules command line arguments
+    args: # optional, default is --burndown --burndown-people --devs --couples
