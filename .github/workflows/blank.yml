@@ -1,4 +1,4 @@
-- name: Hercules Insights
+- name: HerculesInsights
   uses: src-d/hercules@v10.7.2
   with:
     # hercules command line arguments
