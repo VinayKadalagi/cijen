@@ -23,7 +23,8 @@ pipeline {
                     script {
                       final String response = sh(script: 'curl -X POST "https://gitlab.com/api/v4/projects/19079864/merge_requests?source_branch=master&target_branch=feature1&title=test&target_project_id=19079864" --header "Authorization: Bearer Gpzv8Cn-AFFJitgYuSAX"', returnStdout: true).trim()
                       echo response
-                      sh(script: "echo '$response' | jq -r .iid", returnStdout: true)
+                      def json = new groovy.json.JsonSlurperClassic().parseText(response)
+                      echo json.iid
                     }
                 }
                 failure {
