@@ -27,7 +27,7 @@ pipeline {
                       if (json.iid != null){
                       def iid = json.iid.toString()
                       echo iid
-                      final String resp = sh(script: "curl -X PUT https://gitlab.com/api/v4/projects/19079864/merge_requests/$iid/merge --header Authorization: Bearer etaJVqx9sdK44GR45u1W", returnStdout: true).trim()
+                      final String resp = sh(script: "curl -X PUT \"https://gitlab.com/api/v4/projects/19079864/merge_requests/$iid/merge\" --header \"Authorization: Bearer etaJVqx9sdK44GR45u1W\"", returnStdout: true).trim()
                       echo resp
                       }
                     }
