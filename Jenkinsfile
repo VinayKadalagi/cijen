@@ -27,7 +27,7 @@ pipeline {
                       if (json.iid != null){
                       iid = json.iid.toString()
                       echo iid
-                      final String resp = sh 'curl -X POST "https://gitlab.com/api/v4/projects/19079864/merge_requests/$idd/approve" --header "Authorization: Bearer Gpzv8Cn-AFFJitgYuSAX"'
+                      final String resp = sh 'curl -X POST "https://gitlab.com/api/v4/projects/19079864/merge_requests/'${idd}'/approve" --header "Authorization: Bearer Gpzv8Cn-AFFJitgYuSAX"'
                       echo resp
                       }
                     }
