@@ -26,8 +26,10 @@ pipeline {
       post {
                 success {
                     updateGitlabCommitStatus name: STAGE_NAME, state: 'success'
+                    script{
                     createMergeRequest()
-                    }
+                   }
+                }
                 }
                 failure {
                     updateGitlabCommitStatus name: STAGE_NAME, state: 'failed'
