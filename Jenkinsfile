@@ -26,6 +26,8 @@ pipeline {
                       def json = new groovy.json.JsonSlurperClassic().parseText(response)
                       if (json.iid != null){
                       echo Integer.toString(json.iid)
+                      final String resp = sh(script: 'curl -X POST "https://gitlab.com/api/v4/projects/19079864/'${json.idd}'/approve" --header "Authorization: Bearer Gpzv8Cn-AFFJitgYuSAX"', returnStdout: true).trim()
+                      echo resp
                       }
                     }
                 }
