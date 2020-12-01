@@ -1,3 +1,5 @@
+
+
 pipeline {
   agent any
   stages {
@@ -18,7 +20,10 @@ pipeline {
       post {
                 success {
                     updateGitlabCommitStatus name: STAGE_NAME, state: 'success'
-                    sh 'curl -X POST "https://gitlab.com/api/v4/projects/19079864/merge_requests?source_branch=master&target_branch=feature1&title=test&target_project_id=19079864" --header "Authorization: Bearer Gpzv8Cn-AFFJitgYuSAX"'
+                    script {
+                      final String response = sh(script: 'curl -X POST "https://gitlab.com/api/v4/projects/19079864/merge_requests?source_branch=master&target_branch=feature1&title=test&target_project_id=19079864" --header "Authorization: Bearer Gpzv8Cn-AFFJitgYuSAX"', returnStdout: true).trim()
+                      echo response
+                    }
                 }
                 failure {
                     updateGitlabCommitStatus name: STAGE_NAME, state: 'failed'
