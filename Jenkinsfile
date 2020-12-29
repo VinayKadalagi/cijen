@@ -1,7 +1,7 @@
 pipeline {
   agent any
   tools {
-         jdk 'jdk8'
+         maven "maven"
     }
   stages {
     stage('Checkout svn') {
