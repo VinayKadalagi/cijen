@@ -21,13 +21,13 @@ pipeline {
                 success {
                     updateGitlabCommitStatus name: STAGE_NAME, state: 'success'
                     script {
-                      final String response = sh(script: 'curl -X POST "https://gitlab.com/api/v4/projects/19079864/merge_requests?source_branch=feature1&target_branch=master&title=test&target_project_id=19079864" --header "Authorization: Bearer etaJVqx9sdK44GR45u1W"', returnStdout: true).trim()
+                      final String response = sh(script: "curl --header \"PRIVATE-TOKEN: ${GITOKEN}\" -X POST \"https://git.rxcorp.com/api/v4/projects/10216/merge_requests?source_branch=ACOEFMLC-1026-sandbox&target_branch=development&title=test&target_project_id=10216\"", returnStdout: true).trim()
                       echo response
                       def json = new groovy.json.JsonSlurperClassic().parseText(response)
                       if (json.iid != null){
                       def iid = json.iid.toString()
                       echo iid
-                      final String resp = sh(script: "curl -X PUT \"https://gitlab.com/api/v4/projects/19079864/merge_requests/$iid/merge\" --header \"Authorization: Bearer etaJVqx9sdK44GR45u1W\"", returnStdout: true).trim()
+                      final String resp = sh(script: "curl --header \"PRIVATE-TOKEN: ${GITOKEN}\" -X PUT \"https://gitlab.com/api/v4/projects/10216/merge_requests/$iid/merge\"", returnStdout: true).trim()
                       echo resp
                       }
                     }
