@@ -1,7 +1,7 @@
 pipeline {
   agent any
   tools {
-        maven 'apache-maven-3.0.1' 
+         jdk 'jdk8'
     }
   stages {
     stage('Checkout svn') {
