@@ -3,7 +3,7 @@ pipeline {
   tools {
         maven 'apache-maven-3.0.1' 
     }
-  stages 
+  stages {
     stage('Checkout svn') {
       steps {
             // script {
@@ -30,4 +30,5 @@ pipeline {
                 }
             }
     }
+  }
   }
