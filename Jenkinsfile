@@ -4,7 +4,7 @@ pipeline {
     stage('testcreds') {
       steps {
         withCredentials([usernamePassword(
-            credentialsId: "test",
+            credentialsId: "project",
             usernameVariable: 'adminUser',
             passwordVariable: 'adminPassword'
           )]){
