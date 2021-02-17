@@ -12,9 +12,6 @@ pipeline {
           )]){
 
          sh  'echo "$adminUser"'
-          
-        
-        }
         }
       }
     }
